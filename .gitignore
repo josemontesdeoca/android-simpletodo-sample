@@ -1,0 +1,12 @@
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Eclipse Project files
+.classpath
+.project
+
+proguard/
+proguard-project.txt
