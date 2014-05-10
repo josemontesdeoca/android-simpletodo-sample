@@ -117,4 +117,15 @@ public class TodoActivity extends Activity {
     	}
 	}
     
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      if (resultCode == RESULT_OK && requestCode == EDIT_ITEM_REQUEST_CODE) {
+        String item = data.getExtras().getString("item");
+        int pos = data.getExtras().getInt("pos");
+        
+        items.set(pos, item);
+        itemsAdapter.notifyDataSetChanged();
+        saveItems();
+      }
+    }
 }
