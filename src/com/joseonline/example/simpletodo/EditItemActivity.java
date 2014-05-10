@@ -1,16 +1,32 @@
 package com.joseonline.example.simpletodo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class EditItemActivity extends Activity {
 
+	private EditText etEditItem;
+	private String item;
+	private int pos;
+	private int code;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_item);
+		
+		etEditItem = (EditText) findViewById(R.id.etEditItem);
+		
+		item = getIntent().getStringExtra("item");
+		pos = getIntent().getIntExtra("pos", 0);
+		code = getIntent().getIntExtra("code", 0);
+		
+		etEditItem.setText(item);
+		etEditItem.setSelection(item.length());
 	}
 
 	@Override
