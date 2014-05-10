@@ -8,9 +8,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.joseonline.example.simpletodo.TodoActivity$PlaceholderFragment" >
 
-    <TextView
+    <Button
+        android:id="@+id/btnAddItem"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/add_item_label" />
+
+    <EditText
+        android:id="@+id/etNewItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnAddItem"
+        android:layout_alignLeft="@+id/lvItems"
+        android:layout_toLeftOf="@+id/btnAddItem"
+        android:ems="10"
+        android:hint="@string/new_item_promtp" >
+
+        <requestFocus />
+    </EditText>
+
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAddItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btnAddItem" >
+
+    </ListView>
 
 </RelativeLayout>
