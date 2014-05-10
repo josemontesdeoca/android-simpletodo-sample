@@ -33,6 +33,7 @@
         android:id="@+id/btnEditItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="editTodoItem"
         android:layout_alignLeft="@+id/etEditItem"
         android:layout_below="@+id/etEditItem"
         android:layout_marginTop="46dp"

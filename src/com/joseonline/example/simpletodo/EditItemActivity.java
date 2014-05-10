@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 public class EditItemActivity extends Activity {
@@ -48,5 +49,15 @@ public class EditItemActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void editTodoItem(View v) {
+        Intent data = new Intent();
+        
+        data.putExtra("item", etEditItem.getText().toString());
+        data.putExtra("pos", pos);
+        
+        setResult(RESULT_OK, data);
+        finish();
+    }
 
 }
