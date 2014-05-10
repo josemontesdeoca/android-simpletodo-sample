@@ -1,16 +1,31 @@
 package com.joseonline.example.simpletodo;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 public class TodoActivity extends Activity {
+	ArrayList<String> items;
+	ArrayAdapter<String> itemsAdapter;
+	ListView lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+        
+        lvItems = (ListView) findViewById(R.id.lvItems);
+        items = new ArrayList<String>();
+        itemsAdapter = new ArrayAdapter<String>(this, 
+        		android.R.layout.simple_expandable_list_item_1, items);
+        lvItems.setAdapter(itemsAdapter);
     }
 
 
@@ -33,5 +48,11 @@ public class TodoActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public void addTodoItem(View v) {
+    	EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+    	itemsAdapter.add(etNewItem.getText().toString());
+    	etNewItem.setText("");
+	}
 
 }

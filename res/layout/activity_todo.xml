@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:onClick="addTodoItem"
         android:text="@string/add_item_label" />
 
     <EditText
