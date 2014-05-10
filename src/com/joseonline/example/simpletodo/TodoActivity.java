@@ -7,17 +7,21 @@ import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public class TodoActivity extends Activity {
+	private final static int EDIT_ITEM_REQUEST_CODE = 1;
+	
 	ArrayList<String> items;
 	ArrayAdapter<String> itemsAdapter;
 	ListView lvItems;
@@ -50,6 +54,17 @@ public class TodoActivity extends Activity {
 				return true;
 			}
 		});
+		lvItems.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> aView,
+					View item, int pos, long id) {
+				Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
+				intent.putExtra("item", itemsAdapter.getItem(pos));
+				intent.putExtra("pos", pos);
+				startActivityForResult(intent, EDIT_ITEM_REQUEST_CODE);
+			}
+		});
+		
 	}
 
 
