@@ -32,12 +32,13 @@ public class TodoActivity extends Activity {
         setContentView(R.layout.activity_todo);
         
         lvItems = (ListView) findViewById(R.id.lvItems);
-        items = new ArrayList<String>();
+        readItems();
+        
         itemsAdapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_expandable_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
         
-        readItems();
+        
         
         setupListViewListener();
     }
@@ -92,6 +93,7 @@ public class TodoActivity extends Activity {
     	EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
     	itemsAdapter.add(etNewItem.getText().toString());
     	etNewItem.setText("");
+    	saveItems();
 	}
 
     private void readItems() {
@@ -111,6 +113,8 @@ public class TodoActivity extends Activity {
     	try {
     		FileUtils.writeLines(todoFile, items);
     	} catch (IOException e) {
+    		e.printStackTrace();
     	}
 	}
+    
 }
