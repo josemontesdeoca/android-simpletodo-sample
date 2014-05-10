@@ -1,6 +1,10 @@
 package com.joseonline.example.simpletodo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.commons.io.FileUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -28,6 +32,9 @@ public class TodoActivity extends Activity {
         itemsAdapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_expandable_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
+        
+        readItems();
+        
         setupListViewListener();
     }
 
@@ -39,6 +46,7 @@ public class TodoActivity extends Activity {
 					View item, int pos, long id) {
 				items.remove(pos);
 				itemsAdapter.notifyDataSetInvalidated();
+				saveItems();
 				return true;
 			}
 		});
@@ -71,4 +79,23 @@ public class TodoActivity extends Activity {
     	etNewItem.setText("");
 	}
 
+    private void readItems() {
+    	File filesDir = getFilesDir();
+    	File todoFile = new File(filesDir, "todo.txt");
+    	try {
+    		items = new ArrayList<String>(FileUtils.readLines(todoFile));
+    	} catch (IOException e) {
+    		items = new ArrayList<String>();
+    		e.printStackTrace();
+    	}
+	}
+    
+    private void saveItems() {
+    	File filesDir = getFilesDir();
+    	File todoFile = new File(filesDir, "todo.txt");
+    	try {
+    		FileUtils.writeLines(todoFile, items);
+    	} catch (IOException e) {
+    	}
+	}
 }
