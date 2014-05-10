@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,10 +28,24 @@ public class TodoActivity extends Activity {
         itemsAdapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_expandable_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
+        setupListViewListener();
     }
 
 
-    @Override
+    private void setupListViewListener() {
+		lvItems.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> aView,
+					View item, int pos, long id) {
+				items.remove(pos);
+				itemsAdapter.notifyDataSetInvalidated();
+				return true;
+			}
+		});
+	}
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
